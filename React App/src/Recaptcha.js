@@ -17,7 +17,7 @@ function Recaptcha() {
             <Modal show={show} onHide={handleClose} size="lg">
                 <Modal.Header>
                     <Modal.Title>reCaptcha</Modal.Title>
-                    <CloseButton />
+                    <CloseButton onClick={handleClose} />
                 </Modal.Header>
                 <Modal.Body>
                     <Game />
