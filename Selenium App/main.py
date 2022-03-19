@@ -8,7 +8,9 @@ import time
 options = d.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
-driver = d.Chrome(options=options)
+DRIVER_PATH = "chromedriver.exe"
+
+driver = d.Chrome(DRIVER_PATH, options=options)
 link="http://localhost:3000/"
 #goto website
 driver.get(link)
