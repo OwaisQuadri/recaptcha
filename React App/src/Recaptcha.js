@@ -10,8 +10,8 @@ function Recaptcha() {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Launch static backdrop modal
+            <Button variant="primary" onClick={handleShow} id="submit">
+                Open reCaptcha
             </Button>
 
             <Modal show={show} onHide={handleClose} size="lg">
