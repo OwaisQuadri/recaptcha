@@ -1,29 +1,67 @@
+import { Box, Button, Modal, Typography } from "@mui/material";
 import { useState } from "react";
-import { Modal, Button, CloseButton } from "react-bootstrap";
 import Game from "./Game.js";
 
-function Recaptcha() {
-    const [show, setShow] = useState(false);
+const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 700,
+    height: 700,
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    p: 4,
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "column",
+    borderRadius: 3,
+};
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+function Recaptcha() {
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
-        <>
-            <Button variant="primary" onClick={handleShow} id="submit">
-                Open reCaptcha
+        <div
+            style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+            }}
+        >
+            <Button
+                sx={{
+                    boxShadow: 10,
+                    height: 100,
+                    width: 250,
+                    fontSize: 18,
+                    fontWeight: "bold",
+                }}
+                onClick={handleOpen}
+            >
+                Start Recaptcha
             </Button>
-
-            <Modal show={show} onHide={handleClose} size="lg">
-                <Modal.Header>
-                    <Modal.Title>reCaptcha</Modal.Title>
-                    <CloseButton onClick={handleClose} />
-                </Modal.Header>
-                <Modal.Body>
-                    <Game />
-                </Modal.Body>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography
+                        id="modal-modal-title"
+                        variant="h6"
+                        component="h2"
+                    >
+                        reCaptcha
+                    </Typography>
+                    <Game></Game>
+                </Box>
             </Modal>
-        </>
+        </div>
     );
 }
 
