@@ -127,7 +127,16 @@ function Game() {
             )}
             {showOtherThing && !gameOver && (
                 <div>
-                    <p id="timerText">Timer: 10 </p>
+                    <p
+                        id="timerText"
+                        style={{
+                            alignSelf: "center",
+                            textAlign: "center",
+                            marginTop: 20,
+                        }}
+                    >
+                        Timer: 10{" "}
+                    </p>
                     <div
                         id="bttn"
                         style={{
