@@ -42,11 +42,13 @@ def dot_game(driver):
     action.move_to_element_with_offset(dot,offset_x,offset_y).click()
     action.perform()
 def hold_game(driver):
+    timer=driver.find_element(By.ID,"timerText")
+    secs=int(timer.text.split()[-1])
     action=act(driver)
     button=driver.find_element(By.ID,"bttn")
     action.click_and_hold(button)
     action.perform()
-    time.sleep(10)
+    time.sleep(secs)
     action.release()
 ####################################################################### end of functions 
 #configure chrome driver options
