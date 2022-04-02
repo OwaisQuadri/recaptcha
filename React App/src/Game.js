@@ -3,6 +3,7 @@ import target_top from "./target_top.png";
 import target_right from "./target_right.png";
 import target_left from "./target_left.png";
 import target_bottom from "./target_bottom.png";
+import { Zoom } from "@mui/material";
 
 function Game() {
     const [targetPos, setTargetPos] = useState({ x: 10, y: 20 });
@@ -11,6 +12,8 @@ function Game() {
     const [showOtherThing, setShowOtherThing] = useState(false);
     const images = [target_top, target_left, target_right, target_bottom];
     const [image, setImage] = useState(target_top);
+    const [gameOver, setGameOver] = useState(false);
+    const [winner, setWinner] = useState(false);
 
     const handleClick = (e) => {
         console.log(targetCounter);
@@ -56,11 +59,37 @@ function Game() {
         setTargetCounter(targetCounter + 1);
     };
 
+    var x;
+
+    const handleHoldDown = (e) => {
+        var timer = 10;
+        x = setInterval(() => {
+            document.getElementById("timerText").innerHTML =
+                "Timer: " + --timer;
+            if (timer === 0) {
+                console.log("tooo");
+                setGameOver(true);
+                setWinner(true);
+                clearInterval(x);
+            }
+        }, 1000);
+    };
+
+    const handleUp = (e) => {
+        setGameOver(true);
+        setWinner(false);
+        clearInterval(x);
+    };
+
     useEffect(() => {
         let element = null;
         if (showThing) {
             element = document.getElementById("dot");
             element.addEventListener("mousedown", handleClick);
+        } else if (!gameOver) {
+            element = document.getElementById("bttn");
+            element.addEventListener("mousedown", handleHoldDown);
+            element.addEventListener("mouseup", handleUp);
         }
 
         return () => {
@@ -68,7 +97,7 @@ function Game() {
                 element.removeEventListener("mousedown", handleClick);
             }
         };
-    }, [targetCounter]);
+    }, [targetCounter, gameOver]);
 
     return (
         <div
@@ -96,14 +125,15 @@ function Game() {
                     }}
                 ></div>
             )}
-            {showOtherThing && (
+            {showOtherThing && !gameOver && (
                 <div>
+                    <p id="timerText">Timer: 10 </p>
                     <div
                         id="bttn"
                         style={{
                             position: "relative",
-                            top: targetPos.y,
-                            left: targetPos.x,
+                            top: 225,
+                            left: 225,
                             width: 50,
                             height: 50,
                             borderRadius: 999,
