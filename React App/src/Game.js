@@ -96,7 +96,23 @@ function Game() {
                     }}
                 ></div>
             )}
-            {showOtherThing && <p>aa</p>}
+            {showOtherThing && (
+                <div>
+                    <div
+                        id="bttn"
+                        style={{
+                            position: "relative",
+                            top: targetPos.y,
+                            left: targetPos.x,
+                            width: 50,
+                            height: 50,
+                            borderRadius: 999,
+                            backgroundColor: "green",
+                            backgroundSize: "cover",
+                        }}
+                    ></div>
+                </div>
+            )}
         </div>
     );
 }
