@@ -17,8 +17,6 @@ def dot_game(driver):
     #dot game first
     action=act(driver)
     dot=driver.find_element(By.ID,"dot")
-    dot_x=dot.location['x']
-    dot_y=dot.location['y'] 
     #random select 1/4
     offset_x=25
     offset_y=3
@@ -43,7 +41,14 @@ def dot_game(driver):
     # print("clicked "+ str(dot_x+offset_x)+", "+str(dot_y+offset_y))
     action.move_to_element_with_offset(dot,offset_x,offset_y).click()
     action.perform()
-    
+def hold_game(driver):
+    action=act(driver)
+    button=driver.find_element(By.ID,"bttn")
+    action.click_and_hold(button)
+    action.perform()
+    time.sleep(10)
+    action.release()
+####################################################################### end of functions 
 #configure chrome driver options
 options = d.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -62,13 +67,18 @@ print("Website Title:"+driver.title)
 submit_button=driver.find_element(By.ID,"submit")
 #press button
 submit_button.click()
+#play aim trainer game
 goodscore=0
 for i in range(5):
     dot_game(driver)
     for entry in driver.get_log("browser"):
         if 'good' in entry['message']:
             goodscore+=1
+#print score for game 1
 print("score: "+str(goodscore)+"/5")
+#play button holding game
+hold_game(driver)
+
 #code to close current tab
 #driver.close()
 #quit browser
