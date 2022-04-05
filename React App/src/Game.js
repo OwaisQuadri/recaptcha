@@ -108,7 +108,6 @@ function Game() {
                 borderWidth: 2,
                 borderStyle: "solid",
             }}
-            id="game"
         >
             {showThing && (
                 <div

@@ -1,6 +1,9 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
-import { useState } from "react";
-import Game from "./Game.js";
+import { useEffect, useState } from "react";
+import Target from "./Target.js";
+// import Game from "./Game.js";
+import ButtonHold from "./ButtonHold.js";
+import ImageQuestion from "./ImageQuestion.js";
 
 const style = {
     position: "absolute",
@@ -22,6 +25,31 @@ function Recaptcha() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [gameOne, setGameOne] = useState(true);
+    const [gameTwo, setGameTwo] = useState(false);
+    const [gameThree, setGameThree] = useState(false);
+    const [score, setScore] = useState(0);
+
+    const gameOneOver = (result) => {
+        setScore(score + result);
+        setGameOne(false);
+        setGameTwo(true);
+    };
+
+    const gameTwoOver = (result) => {
+        setScore(score + result);
+        setGameTwo(false);
+        setGameThree(true);
+    };
+
+    const gameThreeOver = (result) => {
+        setScore(score + result);
+        setGameThree(false);
+    };
+
+    useEffect(() => {
+        console.log("Score: ", score);
+    });
 
     return (
         <div
@@ -59,7 +87,28 @@ function Recaptcha() {
                     >
                         reCaptcha
                     </Typography>
-                    <Game></Game>
+                    <div
+                        style={{
+                            width: "500px",
+                            height: "500px",
+                            margin: "auto",
+                            borderWidth: 2,
+                            borderStyle: "solid",
+                        }}
+                        id="game"
+                    >
+                        {gameOne && !gameTwo && !gameThree && (
+                            <Target callback={gameOneOver}></Target>
+                        )}
+                        {!gameOne && gameTwo && !gameThree && (
+                            <ButtonHold callback={gameTwoOver}></ButtonHold>
+                        )}
+                        {!gameOne && !gameTwo && gameThree && (
+                            <ImageQuestion
+                                callback={gameThreeOver}
+                            ></ImageQuestion>
+                        )}
+                    </div>
                 </Box>
             </Modal>
         </div>
