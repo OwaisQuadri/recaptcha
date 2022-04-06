@@ -12,45 +12,7 @@ dc['goog:loggingPrefs'] = { 'browser':'ALL' }
 import time
 import random
 
-def dot_game(driver):
 
-    #dot game first
-    action=act(driver)
-    dot=driver.find_element(By.ID,"dot")
-    #random select 1/4
-    offset_x=25
-    offset_y=3
-    for i in range(5):
-        select=random.choice([1,2,3,4])
-        if select == 1:
-            #top
-            pass
-        if select == 2:
-            #bottom
-            offset_x=25
-            offset_y=47
-        if select == 3:
-            #right
-            offset_x=47
-            offset_y=25
-        if select == 4:
-            #left
-            offset_x=3
-            offset_y=25
-    #click
-    # print("clicked "+ str(dot_x+offset_x)+", "+str(dot_y+offset_y))
-    action.move_to_element_with_offset(dot,offset_x,offset_y).click()
-    action.perform()
-def hold_game(driver):
-    timer=driver.find_element(By.ID,"timerText")
-    secs=int(timer.text.split()[-1])
-    action=act(driver)
-    button=driver.find_element(By.ID,"bttn")
-    action.click_and_hold(button)
-    action.perform()
-    time.sleep(secs)
-    action.release()
-####################################################################### end of functions 
 #configure chrome driver options
 options = d.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -69,20 +31,30 @@ print("Website Title:"+driver.title)
 submit_button=driver.find_element(By.ID,"submit")
 #press button
 submit_button.click()
-#play aim trainer game
-goodscore=0
-for i in range(5):
-    dot_game(driver)
-    for entry in driver.get_log("browser"):
-        if 'good' in entry['message']:
-            goodscore+=1
-#print score for game 1
-print("score: "+str(goodscore)+"/5")
-#play button holding game
-hold_game(driver)
+#click on the ___ target
+prompt=driver.find_element(By.ID,"prompt")
+colour=prompt.text.split()[3]
+# print(colour)
+# check which target is coloured in that way
+target=driver.find_element(By.ID,colour)
+target.click()
+#press to fill progress bar
+fill_button=driver.find_element(By.ID,"bttn")
+done_button=driver.find_element(By.ID,"doneBtn")
+for i in range(4):
+    fill_button.click()
+done_button.click()
+# question about image
+# random selection from answer
+answers=[3,4,4,7]
+guess = random.choice(answers)
+text_input=driver.find_element(By.ID,"filled-basic")
+text_input.send_keys(guess)
+done_button=driver.find_element(By.ID,"done")
+done_button.click()
+#done
 
-#code to close current tab
-#driver.close()
+
 #quit browser
-time.sleep(2)
+time.sleep(10)
 driver.quit()

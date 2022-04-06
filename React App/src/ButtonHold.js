@@ -53,6 +53,7 @@ function ButtonHold({ callback }) {
                 variant="determinate"
                 value={progress}
                 style={{ width: "90%", margin: "auto", marginTop: 20 }}
+                id = "progressbar"
             />
             <Button
                 style={{
@@ -60,6 +61,7 @@ function ButtonHold({ callback }) {
                 }}
                 variant="outlined"
                 onClick={handleButton}
+                id = "doneBtn"
             >
                 Done
             </Button>

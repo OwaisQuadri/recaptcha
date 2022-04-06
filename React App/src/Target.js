@@ -23,7 +23,9 @@ function Target({ callback }) {
     for (let i = 0; i < 5; i++) {
         targets.push(
             <div
-                style={{
+            class="target" 
+            id = {colours[i]}  
+            style={{
                     width: 50,
                     height: 50,
                     borderRadius: 999,
@@ -44,7 +46,7 @@ function Target({ callback }) {
                 justifyContent: "center",
             }}
         >
-            <p style={{ textAlign: "center", marginTop: 150 }}>
+            <p id="prompt" style={{ textAlign: "center", marginTop: 150 }}>
                 Click on the {colour} target!
             </p>
             <div

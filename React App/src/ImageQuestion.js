@@ -51,6 +51,7 @@ function ImageQuestion({ callback }) {
                     }}
                     variant="outlined"
                     onClick={handleButton}
+                    id="done"
                 >
                     Done
                 </Button>
