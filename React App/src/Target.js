@@ -23,9 +23,9 @@ function Target({ callback }) {
     for (let i = 0; i < 5; i++) {
         targets.push(
             <div
-            class="target" 
-            id = {colours[i]}  
-            style={{
+                className="target"
+                id={colours[i]}
+                style={{
                     width: 50,
                     height: 50,
                     borderRadius: 999,

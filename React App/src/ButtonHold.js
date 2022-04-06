@@ -9,7 +9,6 @@ function ButtonHold({ callback }) {
     );
 
     const handleClick = () => {
-        console.log(filler);
         setProgress(progress + filler);
     };
 
@@ -53,7 +52,7 @@ function ButtonHold({ callback }) {
                 variant="determinate"
                 value={progress}
                 style={{ width: "90%", margin: "auto", marginTop: 20 }}
-                id = "progressbar"
+                id="progressbar"
             />
             <Button
                 style={{
@@ -61,7 +60,7 @@ function ButtonHold({ callback }) {
                 }}
                 variant="outlined"
                 onClick={handleButton}
-                id = "doneBtn"
+                id="doneBtn"
             >
                 Done
             </Button>

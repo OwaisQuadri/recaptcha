@@ -1,7 +1,6 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Target from "./Target.js";
-// import Game from "./Game.js";
 import ButtonHold from "./ButtonHold.js";
 import ImageQuestion from "./ImageQuestion.js";
 
@@ -45,6 +44,7 @@ function Recaptcha() {
     const gameThreeOver = (result) => {
         setScore(score + result);
         setGameThree(false);
+        handleClose();
     };
 
     useEffect(() => {

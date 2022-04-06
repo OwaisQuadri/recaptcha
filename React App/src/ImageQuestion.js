@@ -15,7 +15,6 @@ function ImageQuestion({ callback }) {
     const [value, setValue] = useState("");
 
     const handleButton = () => {
-        console.log(value, choice[1], value == choice[1]);
         if (value == choice[1]) {
             callback(1);
         } else {
