@@ -51,7 +51,7 @@ done_button.click()
 time.sleep(3)
 # question about image
 # random selection from answer
-answers=[3,4,4,7]
+answers=[1,2,3,4,5,6,7,8,9,0]
 guess = random.choice(answers)
 text_input=driver.find_element(By.ID,"filled-basic")
 text_input.send_keys(guess)
@@ -63,5 +63,5 @@ time.sleep(3)
 
 
 #quit browser
-time.sleep(10)
+time.sleep(100)
 driver.quit()
